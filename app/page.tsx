@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// --- CORREÇÃO AQUI ---
+// Adicionei 'as const' no transition para o TypeScript entender o tipo de 'ease'
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-50px" },
-  transition: { duration: 0.6, ease: "easeOut" }
+  transition: { duration: 0.6, ease: "easeOut" } as const
 };
 
 const FAQItem = ({ pergunta, resposta }: { pergunta: string, resposta: string }) => {
@@ -46,7 +48,6 @@ const FAQItem = ({ pergunta, resposta }: { pergunta: string, resposta: string })
 };
 
 export default function Home() {
-  // Link dinâmico para o seu WhatsApp
   const whatsappLink = "https://wa.me/5582993610512?text=Olá,%20gostaria%20de%20agendar%20uma%20consultoria.";
 
   return (
@@ -98,10 +99,10 @@ export default function Home() {
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-6xl md:text-[115px] font-black leading-[1.2] md:leading-[1.1] mb-8 md:mb-14 tracking-tight text-white flex flex-col items-center"
+            className="text-5xl sm:text-6xl md:text-[115px] font-black leading-tight mb-8 md:mb-14 tracking-tight text-white flex flex-col items-center"
           >
             <span className="block drop-shadow-2xl">DEDICAÇÃO</span>
-            <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-500 to-orange-600 py-4 inline-block leading-none">
+            <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-500 to-orange-600 py-6 inline-block leading-none">
               IMPLACÁVEL.
             </span>
           </motion.h1>
@@ -122,7 +123,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="bg-white text-black px-10 md:px-12 py-4 md:py-6 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest hover:bg-amber-500 transition-all shadow-xl inline-block w-full md:w-auto">
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="bg-white text-black px-10 md:px-12 py-4 md:py-6 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest hover:bg-amber-500 transition-all shadow-xl inline-block w-full md:w-auto text-center">
               Falar com Especialista
             </a>
           </motion.div>
@@ -145,7 +146,13 @@ export default function Home() {
       {/* --- SEÇÃO SOBRE --- */}
       <section id="sobre" className="py-16 md:py-32 px-6 bg-white/[0.02] backdrop-blur-sm border-b border-white/5">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-          <motion.div {...fadeInUp} className="relative group order-2 md:order-1">
+          <motion.div 
+            initial={fadeInUp.initial}
+            whileInView={fadeInUp.whileInView}
+            viewport={{ once: true }}
+            transition={fadeInUp.transition}
+            className="relative group order-2 md:order-1"
+          >
             <div className="absolute -inset-2 md:-inset-4 bg-amber-500/10 rounded-[2.5rem] md:rounded-[3rem] blur-2xl transition duration-500" />
             <div className="relative aspect-square md:aspect-[4/5] bg-slate-800 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
               <img 
@@ -156,7 +163,13 @@ export default function Home() {
             </div>
           </motion.div>
           
-          <motion.div {...fadeInUp} className="order-1 md:order-2 text-center md:text-left">
+          <motion.div 
+            initial={fadeInUp.initial}
+            whileInView={fadeInUp.whileInView}
+            viewport={{ once: true }}
+            transition={fadeInUp.transition}
+            className="order-1 md:order-2 text-center md:text-left"
+          >
             <h2 className="text-3xl md:text-6xl font-black mb-6 md:mb-8 leading-tight text-white uppercase italic">
               Solidez <br className="hidden md:block"/> Gera <span className="text-amber-500">Resultados.</span>
             </h2>
@@ -180,7 +193,13 @@ export default function Home() {
       {/* --- ÁREAS DE ATUAÇÃO --- */}
       <section id="atuacao" className="py-16 md:py-32 px-6">
         <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-12 md:mb-20">
+          <motion.div 
+            initial={fadeInUp.initial}
+            whileInView={fadeInUp.whileInView}
+            viewport={{ once: true }}
+            transition={fadeInUp.transition}
+            className="text-center mb-12 md:mb-20"
+          >
             <h2 className="text-3xl md:text-5xl font-black mb-4 text-white uppercase tracking-tighter">Expertise</h2>
             <div className="h-1 w-16 md:w-24 bg-amber-500 mx-auto rounded-full" />
           </motion.div>
@@ -212,12 +231,21 @@ export default function Home() {
       {/* --- SEÇÃO FAQ --- */}
       <section id="faq" className="py-16 md:py-32 px-6">
         <div className="max-w-4xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-10 md:mb-16">
+          <motion.div 
+            initial={fadeInUp.initial}
+            whileInView={fadeInUp.whileInView}
+            viewport={{ once: true }}
+            transition={fadeInUp.transition}
+            className="text-center mb-10 md:mb-16"
+          >
             <h2 className="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tighter">FAQ</h2>
-            <p className="text-slate-500 text-xs md:text-base px-4">Respostas rápidas sobre nossos processos jurídico.</p>
+            <p className="text-slate-500 text-xs md:text-base px-4">Respostas rápidas sobre nossos processos jurídicos.</p>
           </motion.div>
           <motion.div 
-            {...fadeInUp}
+            initial={fadeInUp.initial}
+            whileInView={fadeInUp.whileInView}
+            viewport={{ once: true }}
+            transition={fadeInUp.transition}
             className="bg-slate-900/40 rounded-[2rem] md:rounded-[3rem] p-4 md:p-12 border border-white/5 backdrop-blur-sm"
           >
             <FAQItem 
@@ -239,10 +267,10 @@ export default function Home() {
       {/* --- LOCALIZAÇÃO --- */}
       <section id="local" className="py-16 md:py-32 px-6 pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto rounded-[2rem] md:rounded-[3.5rem] overflow-hidden bg-slate-900/40 border border-white/10 flex flex-col md:flex-row shadow-2xl">
-          <div className="p-8 md:p-20 md:w-1/2 flex flex-col justify-center">
+          <div className="p-8 md:p-20 md:w-1/2 flex flex-col justify-center text-center md:text-left">
             <h2 className="text-3xl font-black mb-8 text-white uppercase italic">Onde Estamos</h2>
             <div className="space-y-6 md:space-y-8 mb-10">
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-4 justify-center md:justify-start">
                 <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0 border border-amber-500/20 text-amber-500 text-[10px] font-black">
                   01
                 </div>
@@ -250,7 +278,7 @@ export default function Home() {
               </div>
             </div>
             <a 
-              href="https://maps.app.goo.gl/u5q3aqqdxSZJHW1Y7" 
+              href="https://www.google.com/maps" 
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-white text-black px-8 md:px-12 py-4 rounded-xl md:rounded-2xl font-black text-center text-[10px] md:text-sm uppercase tracking-widest active:scale-95 transition-transform"
@@ -278,7 +306,7 @@ export default function Home() {
               <a href="#" className="hover:text-white transition-colors px-2">LinkedIn</a>
               <a href="#" className="hover:text-white transition-colors px-2">Políticas</a>
             </div>
-            <p className="text-slate-600 text-[8px] md:text-[10px] uppercase tracking-widest font-medium">
+            <p className="text-slate-600 text-[8px] md:text-[10px] uppercase tracking-widest font-medium text-center">
               © 2025 Silva & Associados • OAB/SP 123.456
             </p>
           </div>
